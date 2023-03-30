@@ -1,0 +1,19 @@
+first creat a key file as "login.pem"
+create a inventory file as "inventory"....  add all ips,names etc and can create groups .... its for connecting the ansible controler to all worker nodes.
+then create a playbook file which you want to install into an instance .
+.........................  file name should be playbook.yml   ................
+
+- name: installing jdk
+  hosts: all
+  become: yes
+  tasks:
+    - name: install java
+      apt:
+       name: openjdk-11-jre-headless
+       state: present
+      when: ansible_os_family == "Debian"
+    - name: install java
+      yum:
+       name: java-1.8.0-openjdk
+       state: present
+      when: ansible_os_family == "RedHat"
