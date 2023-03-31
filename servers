@@ -1,0 +1,22 @@
+......... this code is for apache2 server .........
+
+- name: install httpd server
+  hosts: all
+  become: yes
+  tasks:
+    - name: updating client server
+      command: sudo apt update
+    - name: installing httpd server on host machine
+      command: sudo apt install apache2 -y
+    - name: copying html file in host machine
+      copy:
+        src: /home/ubuntu/example1/index.html
+        dest: /var/www/html/index.html
+    - name: starting the httpd service
+      service:
+        name: apache2
+        state: started
+    - name: enabling the apache server
+      service:
+        name: apache2
+        enabled: yes
